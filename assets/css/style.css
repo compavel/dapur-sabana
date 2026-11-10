@@ -2103,6 +2103,11 @@ a.contact-card:hover {
     display: none !important;
   }
 
+  .js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   body {
     background: #fff;
     color: #000;

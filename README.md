@@ -7,6 +7,9 @@ natural, target utama klien korporat yang memesan hampers, kue pernikahan, dan k
 > **Catatan kejujuran:** ini website demo untuk portofolio. Bisnisnya fiktif, alamat,
 > nomor telepon, harga, dan testimoni adalah contoh. Form tidak mengirim data ke mana pun.
 
+**Live demo:** <https://compavel.github.io/dapur-sabana/>
+**Repo:** <https://github.com/compavel/dapur-sabana>
+
 ---
 
 ## Latar belakang masalah
@@ -80,6 +83,20 @@ dan beberapa browser membatasi `fetch` untuk file lokal.
 
 ---
 
+## Deploy
+
+Tanpa build step, jadi cukup dipublikasikan sebagai file statis:
+
+- **GitHub Pages** — branch `main`, path `/`. File `.nojekyll` mencegah Jekyll memproses
+  folder yang diawali garis bawah (mis. `_*`).
+- URL: <https://compavel.github.io/dapur-sabana/>
+
+Setiap push ke `main` memicu rebuild otomatis (±1 menit). Kalau halaman masih 404 setelah
+push, cek status build di *Settings → Pages* atau lewat
+`gh api repos/compavel/dapur-sabana/pages/builds/latest`.
+
+---
+
 ## Struktur
 
 ```
@@ -88,6 +105,7 @@ dapur-sabana/
 ├─ galeri.html
 ├─ layanan.html
 ├─ kontak.html
+├─ .nojekyll                # matikan pemrosesan Jekyll di GitHub Pages
 ├─ assets/
 │  ├─ css/style.css        # design tokens, komponen, responsive, print
 │  ├─ js/main.js           # header, nav, reveal, filter, lightbox, form
@@ -125,6 +143,10 @@ Diuji dengan Chrome headless (Playwright) terhadap server lokal:
 - Form layanan dan kontak: pesan sukses muncul, field ter-reset, tanpa error console.
 - Navigasi mobile: `aria-expanded` berubah `true`/`false`, panel terlihat saat dibuka.
 - Semua tautan internal mengarah ke halaman yang ada (status 200).
+- Galeri: 8 tile berukuran identik (aspect ratio 4:3) di 1440px, 1280px, 700px, dan 390px —
+  tidak ada tile yang lebih tinggi atau lebih lebar dari yang lain.
+- Situs live di GitHub Pages: halaman utama, `galeri.html`, dan `assets/css/style.css`
+  membalas `200 OK` dan berisi versi terbaru.
 
 Yang **belum** diuji: pembaca layar sungguhan, Safari/Firefox, dan perangkat fisik.
 Kontras dicek manual, bukan dengan alat otomatis.
